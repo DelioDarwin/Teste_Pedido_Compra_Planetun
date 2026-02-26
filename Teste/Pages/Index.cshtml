@@ -1,0 +1,43 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center mb-5">
+    <h1 class="display-4">Sistema de Pedidos</h1>
+    <p class="lead">Demo de modernizacao: monolito para arquitetura orientada a mensagens</p>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card border-danger h-100">
+            <div class="card-header bg-danger text-white">ANTES (Monolito)</div>
+            <div class="card-body">
+<pre><code>CreateInvoice()
+{
+    SalvarNoBanco();
+    ChamarAPIExterna();   // falhou? Tudo falha!
+    EnviarEmail();        // bloqueado
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card border-success h-100">
+            <div class="card-header bg-success text-white">DEPOIS (Moderno)</div>
+            <div class="card-body">
+<pre><code>CreateOrder()
+{
+    SalvarNoBanco();
+    PublicarMensagem();   // retorna na hora!
+}
+// Workers em background com retry</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-page="/Pedidos/Index" class="btn btn-lg btn-primary">Gerenciar Pedidos</a>
+</div>

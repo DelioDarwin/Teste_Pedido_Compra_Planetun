@@ -1,0 +1,36 @@
+﻿@page
+@model Teste.Pages.Pedidos.IndexModel
+@{ ViewData["Title"] = "Pedidos"; }
+
+<h1>Pedidos</h1>
+<p><a asp-page="Create" class="btn btn-primary">+ Novo Pedido</a></p>
+
+@if (!Model.Pedidos.Any())
+{
+    <div class="alert alert-info">Nenhum pedido ainda.</div>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr><th>ID</th><th>Cliente</th><th>Email</th><th>Data</th><th>Status</th><th>Itens</th><th class="text-end">Total</th><th>Acoes</th></tr>
+        </thead>
+        <tbody>
+        @foreach (var p in Model.Pedidos)
+        {
+            <tr>
+                <td>@p.OrderId</td><td>@p.CustomerName</td><td>@p.CustomerEmail</td>
+                <td>@p.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                <td><span class="badge @(p.Status == "Pendente" ? "bg-warning text-dark" : p.Status == "Cancelado" ? "bg-danger" : "bg-success")">@p.Status</span></td>
+                <td>@p.Itens.Count</td>
+                <td class="text-end">R$ @p.TotalAmount.ToString("N2")</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@p.OrderId" class="btn btn-sm btn-outline-secondary">Editar</a>
+                    <a asp-page="Delete" asp-route-id="@p.OrderId" class="btn btn-sm btn-outline-danger">Excluir</a>
+                    <a asp-page="../Itens/Index" asp-route-orderId="@p.OrderId" class="btn btn-sm btn-outline-info">Itens</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}

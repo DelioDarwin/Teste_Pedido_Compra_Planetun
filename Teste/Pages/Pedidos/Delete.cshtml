@@ -1,0 +1,16 @@
+﻿@page "{id:int}"
+@model Teste.Pages.Pedidos.DeleteModel
+@{ ViewData["Title"] = "Excluir Pedido"; }
+
+<h1>Excluir Pedido #@Model.Pedido.OrderId</h1>
+<div class="alert alert-danger">Tem certeza? Todos os itens tambem serao removidos.</div>
+<dl class="row">
+    <dt class="col-sm-3">Cliente</dt><dd class="col-sm-9">@Model.Pedido.CustomerName</dd>
+    <dt class="col-sm-3">Email</dt><dd class="col-sm-9">@Model.Pedido.CustomerEmail</dd>
+    <dt class="col-sm-3">Total</dt><dd class="col-sm-9">R$ @Model.Pedido.TotalAmount.ToString("N2")</dd>
+</dl>
+<form method="post">
+    <input type="hidden" asp-for="Pedido.OrderId" />
+    <button type="submit" class="btn btn-danger">Sim, Excluir</button>
+    <a asp-page="Index" class="btn btn-secondary">Cancelar</a>
+</form>

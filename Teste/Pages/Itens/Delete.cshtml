@@ -1,0 +1,21 @@
+﻿@page "{id:int}"
+@model Teste.Pages.Itens.DeleteModel
+@{ ViewData["Title"] = "Excluir Item"; }
+
+<h1>Excluir Item #@Model.Item.ItemId</h1>
+<div class="alert alert-danger">Tem certeza?</div>
+<dl class="row">
+    <dt class="col-sm-3">Produto</dt><dd class="col-sm-9">@Model.Item.ProductId</dd>
+    <dt class="col-sm-3">Quantidade</dt><dd class="col-sm-9">@Model.Item.Quantity</dd>
+    <dt class="col-sm-3">Preco Unit.</dt><dd class="col-sm-9">R$ @Model.Item.UnitPrice.ToString("N2")</dd>
+    <dt class="col-sm-3">Subtotal</dt><dd class="col-sm-9">R$ @Model.Item.LineTotal.ToString("N2")</dd>
+</dl>
+<form method="post">
+    <input type="hidden" asp-for="Item.ItemId" />
+    <input type="hidden" asp-for="Item.OrderId" />
+    <input type="hidden" asp-for="Item.ProductId" />
+    <input type="hidden" asp-for="Item.Quantity" />
+    <input type="hidden" asp-for="Item.UnitPrice" />
+    <button type="submit" class="btn btn-danger">Sim, Excluir</button>
+    <a asp-page="Index" asp-route-orderId="@Model.Item.OrderId" class="btn btn-secondary">Cancelar</a>
+</form>

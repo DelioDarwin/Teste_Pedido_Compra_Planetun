@@ -1,0 +1,37 @@
+﻿@page "{orderId:int}"
+@model Teste.Pages.Itens.IndexModel
+@{ ViewData["Title"] = "Itens do Pedido"; }
+
+<h1>Itens do Pedido #@Model.Pedido!.OrderId</h1>
+<p><strong>Cliente:</strong> @Model.Pedido!.CustomerName | <strong>Total:</strong> R$ @Model.Pedido!.TotalAmount.ToString("N2")</p>
+<p>
+    <a asp-page="Create" asp-route-orderId="@Model.Pedido!.OrderId" class="btn btn-primary">+ Adicionar Item</a>
+    <a asp-page="../Pedidos/Index" class="btn btn-outline-secondary">Voltar</a>
+</p>
+
+@if (!Model.Pedido!.Itens.Any())
+{
+    <div class="alert alert-info">Nenhum item.</div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr><th>ID</th><th>Produto</th><th>Qtd</th><th class="text-end">Preco Unit.</th><th class="text-end">Subtotal</th><th>Acoes</th></tr>
+        </thead>
+        <tbody>
+        @foreach (var i in Model.Pedido!.Itens)
+        {
+            <tr>
+                <td>@i.ItemId</td><td>@i.ProductId</td><td>@i.Quantity</td>
+                <td class="text-end">R$ @i.UnitPrice.ToString("N2")</td>
+                <td class="text-end">R$ @i.LineTotal.ToString("N2")</td>
+                <td>
+                    <a asp-page="Edit" asp-route-id="@i.ItemId" class="btn btn-sm btn-outline-secondary">Editar</a>
+                    <a asp-page="Delete" asp-route-id="@i.ItemId" class="btn btn-sm btn-outline-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
