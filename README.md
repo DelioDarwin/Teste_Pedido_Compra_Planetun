@@ -1,4 +1,6 @@
-﻿# Sistema de Pedidos — Demo de Modernizacao .NET
+﻿# Teste Planetun = Sistema de Pedidos
+
+ > **Delio Darwin**
 
 Aplicacao completa em **ASP.NET Core 9 (Razor Pages)** que demonstra a modernizacao incremental de um sistema monolitico sincrono para uma **arquitetura orientada a mensagens** com resiliencia.
 
